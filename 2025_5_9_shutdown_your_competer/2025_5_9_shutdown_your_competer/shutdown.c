@@ -1,4 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
+//下述代码是使用C语言写的
+// The following code is written in C language
 //这是一个关机程序,程序运行之后就会在十分钟（可以自由控制）内关闭，除非输入一些特定的内容
 //This is a shutdown program. After it runs, the system will shut down within ten minutes
 // (which can be freely controlled), unless some specific content is entered.
