@@ -1,0 +1,91 @@
+<!--
+ * @Author: @qi-haotong 1936527505@qq.com
+ * @Date: 2025-05-21 22:56:38
+ * @LastEditors: @qi-haotong 1936527505@qq.com
+ * @LastEditTime: 2025-06-04 16:31:40
+ * @FilePath: \2025_5_21_JavaScript_Small_Project\Guessing_numbers_game.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" id="reset">重新开始一局游戏</button>
+    <br>
+    请输入要猜的数字：<input type="text" id="number" placeholder="请输入1-100之间的数字">
+    <button type="button" id="butten">猜</button>
+    <br>
+    已经猜的次数：<span id="count">0</span>
+    <br>
+    结果：<span id="result"></span>
+    <script>
+        var inputE = document.querySelector("#number");
+        var countE = document.querySelector("#count");
+        var resultE = document.querySelector("#result");
+        var btn = document.querySelector("#butten");
+        var resetBtn = document.querySelector("#reset");
+        //随机生成一个1-100之间的数字
+        var guessNumber = Math.floor(Math.random() * 100) + 1;//0 - 1之间的数 
+        var count = 0;
+        //on：当
+        //click：点击
+        //事件驱动(Event-Drive):只要真正的发生了点击事件时，才能执行该函数
+        btn.onclick = function () {
+            count++;
+            countE.innerText = count;
+            //获取用户输入的数字
+            var userGuess = parseInt(inputE.value);
+            //扩展的功能：
+            //如果用户没有输入数字
+            if (isNaN(userGuess)) {
+                resultE.innerText = "请输入一个数字";
+                inputE.value = ""; // 清空输入框
+                window.alert("请输入一个数字");
+                // 这里使用 window.alert 提示用户输入数字
+                return;
+            }
+            //如果用户输入的数字不在1-100之间
+            if (userGuess < 1 || userGuess > 100) {
+                resultE.innerText = "请输入1-100之间的数字";
+                inputE.value = ""; // 清空输入框
+                window.alert("请输入1-100之间的数字");
+                // 这里使用 window.alert 提示用户输入1-100的数字
+                return;
+            }
+            //判断用户输入的数字和随机生成的数字的大小关系
+            // if (userGuess < guessNumber) {
+            //     resultE.innerHTML = "猜小了";
+            // } else if (userGuess > guessNumber) {
+            //     resultE.innerHTML = "猜大了";
+            // } else {
+            //     resultE.innerHTML = "恭喜你，猜对了！";
+            //     btn.disabled = true; // 禁用按钮
+            // }
+             if (userGuess == guessNumber) {
+                resultE.innerText = "猜对了";
+                resultE.style = "color: gray;";
+            } else if (userGuess < guessNumber) {
+                resultE.innerText = "猜小了";
+                resultE.style = "color: blue;";
+            } else {
+                resultE.innerText = "猜大了";
+                resultE.style = "color: red;";
+            }
+        };
+
+        resetBtn.onclick = function () {
+            //重新开始游戏
+            guessNumber = Math.floor(Math.random() * 100) + 1;
+            count = 0;
+            countE.innerText = count;
+            resultE.innerText = "";
+            inputE.value = "";
+            //btn.disabled = false; // 启用按钮
+        };
+    </script>
+</body>
+</html>
