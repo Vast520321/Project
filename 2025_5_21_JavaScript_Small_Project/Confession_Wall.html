@@ -1,0 +1,104 @@
+<!--
+ * @Author: @qi-haotong 1936527505@qq.com
+ * @Date: 2025-06-04 17:50:18
+ * @LastEditors: @qi-haotong 1936527505@qq.com
+ * @LastEditTime: 2025-06-04 19:03:30
+ * @FilePath: \2025_5_21_JavaScript_Small_Project\Confession_Wal.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!-- 这是一个使用javaScript写的表白墙案例 -->
+<!-- This is an example of a confession wall written in JavaScript -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表白墙(confession wall)</title>
+    <link rel="stylesheet" href="Confession_Wall.css">
+ </head>
+ <body>
+    <div class="container">
+    <h1>表白墙</h1>
+    <p>输入后点击提交, 会将信息显示在表格中</p>
+    <div class="row">
+        <span>谁: </span>
+        <input class="edit" type="text">
+    </div>
+    <div class="row">
+        <span>对谁: </span>
+        <input class="edit" type="text">
+    </div>
+    <div class="row">
+        <span>说什么: </span>
+        <input class="edit" type="text">
+    </div>
+    <div class="row">
+        <input type="button" value="提交" id="submit">
+    </div>
+    </div>
+
+
+<!-- 实现提交和呈现 -->
+<script>
+//给点击按钮注册点击事件
+var submit = document.getElementById('submit');
+submit.onclick = function() {
+    // 1. 获取到编辑框内容
+    var edits = document.querySelectorAll('.edit');
+    var from = edits[0].value;
+    var to = edits[1].value;
+    var message = edits[2].value;
+    console.log(from + "," + to + "," + message);
+    if (from == '' || to == '' || message == '') {
+        window.alert('请填写完整信息');
+        // 如果有一个输入框没有填写内容，则提示用户填写完整信息
+        return;
+    }
+    // 2. 构造 html 元素
+    var row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = from + '对' + to + '说: ' + message;
+    // 3. 把构造好的元素添加进去
+    var container = document.querySelector('.container');
+    container.appendChild(row);
+    // 4. 同时清理之前输入框的内容
+    for (var i = 0; i < 3; i++) {
+        edits[i].value = '';
+   }
+    // 这是另外一个设计形式，但是可以参考修改
+        // //获取输入框的值
+        // var who = document.querySelectorAll('.edit')[0].value;
+        // var toWho = document.querySelectorAll('.edit')[1].value;
+        // var what = document.querySelectorAll('.edit')[2].value;
+
+        // //创建一个新的表格行
+        // var newRow = document.createElement('tr');
+        
+        // //创建单元格并添加内容
+        // var whoCell = document.createElement('td');
+        // whoCell.textContent = who;
+        // newRow.appendChild(whoCell);
+        
+        // var toWhoCell = document.createElement('td');
+        // toWhoCell.textContent = toWho;
+        // newRow.appendChild(toWhoCell);
+        
+        // var whatCell = document.createElement('td');
+        // whatCell.textContent = what;
+        // newRow.appendChild(whatCell);
+
+        // //将新行添加到表格中
+        // var table = document.querySelector('table');
+        // if (!table) {
+        //     table = document.createElement('table');
+        //     document.body.appendChild(table);
+        // }
+        
+        // table.appendChild(newRow);
+
+        // //清空输入框
+        // document.querySelectorAll('.edit').forEach(input => input.value = '');
+    };
+</script>
+</body>
+</html>

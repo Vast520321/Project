@@ -1,0 +1,179 @@
+<!--
+ * @Author: @qi-haotong 1936527505@qq.com
+ * @Date: 2025-06-04 19:05:45
+ * @LastEditors: @qi-haotong 1936527505@qq.com
+ * @LastEditTime: 2025-06-04 23:10:01
+ * @FilePath: \2025_5_21_JavaScript_Small_Project\Proxy_Affairs_Notebook.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!-- 这是一个待办记事本 This is a to-do list-->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办记事本</title>
+ </head>
+ <body>
+<div class="nav">
+     <input type="text">
+     <button>新建任务</button>
+</div>
+
+<div class="container">
+    <div class="todo">
+        <h3>未完成</h3>
+        <div class="row">
+            <input type="checkbox">
+            <span>吃饭</span>
+            <button>删除</button>
+        </div>
+    </div>
+    <div class="done">
+        <h3>已完成</h3>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    .nav {
+        margin-bottom: 20px;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+    .todo, .done {
+        width: 45%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        background-color: #28a745;
+        color: white;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+    h3 {
+        margin-bottom: 15px;
+    }
+    input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    span {
+        flex-grow: 1;
+    }
+</style>
+
+<script>
+    // 实现新增任务
+var addTaskButton = document.querySelector('.nav button');
+var input = document.querySelector('.nav input');
+
+addTaskButton.onclick = function () {
+    // 1. 获取到任务内容的输入框
+    // 2. 获取到输入框内容
+    var taskContent = input.value.trim();
+    if (!taskContent) {
+        input.focus();
+        return;
+    }
+    // 3. 根据内容新建一个元素节点
+    var row = document.createElement('div');
+    row.className = 'row';
+    var checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    var span = document.createElement('span');
+    span.innerHTML = taskContent;
+    var button = document.createElement('button');
+    button.innerHTML = '删除';
+    row.appendChild(checkbox);
+    row.appendChild(span);
+    row.appendChild(button);
+    // 4. 把新节点插入到 todo 中
+    var todo = document.querySelector('.todo');
+    todo.appendChild(row);
+
+    // 5. 给 checkbox 注册点击事件
+    checkbox.onclick = function () {
+        var row = this.parentNode;
+        if (this.checked) {
+            var target = document.querySelector('.done');
+        } else {
+            var target = document.querySelector('.todo');
+        }
+        target.appendChild(row);
+    }
+    // 6. 给删除按钮注册点击事件
+    button.onclick = function () {
+        var row = this.parentNode;
+        var grandParent = row.parentNode;
+        grandParent.removeChild(row);
+    }
+    // 7. 清空输入框
+    input.value = '';
+    // 8. 设置输入框获取焦点
+    input.focus();
+}
+
+// 9. 页面加载完成后, 设置输入框获取焦点
+window.onload = function () {
+    input.focus();
+}
+
+// 10. 给输入框注册回车事件
+input.onkeydown = function (event) {
+    if (event.key === 'Enter') {
+        addTaskButton.onclick();
+    }
+}
+
+// 11. 给初始的删除按钮注册点击事件
+var deleteButtons = document.querySelectorAll('.todo button');
+deleteButtons.forEach(function (button) {
+    button.onclick = function () {
+        var row = this.parentNode;
+        var grandParent = row.parentNode;
+        grandParent.removeChild(row);
+    }
+});
+
+// 12. 给初始的 checkbox 注册点击事件
+var checkboxes = document.querySelectorAll('.todo input[type="checkbox"]');
+checkboxes.forEach(function (checkbox) {
+    checkbox.onclick = function () {
+        var row = this.parentNode;
+        if (this.checked) {
+            var target = document.querySelector('.done');
+        } else {
+            var target = document.querySelector('.todo');
+        }
+        target.appendChild(row);
+    }
+});
+
+</script>
+ </body>
+ </html>
