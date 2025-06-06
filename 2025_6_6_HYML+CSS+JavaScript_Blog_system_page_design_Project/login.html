@@ -1,0 +1,50 @@
+<!--
+ * @Author: @qi-haotong 1936527505@qq.com
+ * @Date: 2025-06-06 18:48:59
+ * @LastEditors: @qi-haotong 1936527505@qq.com
+ * @LastEditTime: 2025-06-06 18:55:47
+ * @FilePath: \2025_6_6_HYML+CSS+JavaScript_Blog_system_page_design_Project\login.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!-- 这是一个博客登录页 -->
+<!-- This is a blog login page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客登录页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+ <!-- 导航栏 -->
+ <div class="nav">
+     <img src="img/logo2.jpg" alt="">
+     <span class="title">我的博客系统</span>
+     <!-- 用来占据中间位置 -->
+     <span class="spacer"></span>
+     <a href="blog_list.html">主页</a>
+     <a href="blog_edit.html">写博客</a>
+     <a href="logout">注销</a>
+ </div>
+ <!-- 版心 -->
+ <div class="login-container">
+    <!-- 中间的登陆框 -->
+    <div class="login-dialog">
+        <h3>登陆</h3>
+        <div class="row">
+            <span>用户名</span>
+            <input type="text" id="username">
+        </div>
+        <div class="row">
+            <span>密码</span>
+            <input type="password" id="password">
+        </div>
+        <div class="row">
+            <button id="submit">提交</button>
+        </div>
+    </div>
+ </div>
+</body>
+</html>

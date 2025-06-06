@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客编辑页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <!-- 引入 editor.md 的依赖 -->
+    <link rel="stylesheet" href="editor.md/css/editormd.min.css" />
+    <link rel="icon" href="data:,"> <!-- 禁用favicon请求 -->
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="img/logo2.jpg" alt="网站logo">
+        <span class="title">我的博客系统</span>
+        <!-- 用来占据中间位置 -->
+        <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+        <a href="logout">注销</a>
+    </div>
+    <!-- 编辑框容器 -->
+    <div class="blog-edit-container">
+        <!-- 标题编辑区 -->
+        <div class="title">
+            <input type="text" placeholder="在这里写下文章标题" id="title">
+            <button id="submit">发布文章</button>
+        </div>
+        <!-- 创建编辑器标签 -->
+        <div id="editor"></div>
+    </div>
+
+    <!-- JavaScript 引用放在底部 -->
+    <script src="https://cdn.jsdelivr.net/npm/zepto@1.2.0/dist/zepto.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zepto@1.2.0/dist/zepto.min.js"></script>
+    <!-- <script src="http://127.0.0.1:5500/js/jquery.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>
+    <script src="editor.md/lib/marked.min.js"></script>
+    <script src="editor.md/lib/prettify.min.js"></script>
+    <script src="editor.md/editormd.js"></script>
+    
+    <script>
+        // 初始化编辑器
+        var editor = editormd("editor", {
+            // 这里的尺寸必须在这里设置. 设置样式会被 editormd 自动覆盖掉. 
+            width: "100%",
+            // 高度 100% 意思是和父元素一样高. 要在父元素的基础上去掉标题编辑区的高度
+            height: "calc(100% - 50px)",
+            // 编辑器中的初始内容
+            markdown: "# 在这里写下一篇博客",
+            // 指定 editor.md 依赖的插件路径
+            path: "editor.md/lib/",
+            // 添加保存/提交功能
+            saveHTMLToTextarea: true
+        });
+
+        // 添加提交按钮事件处理
+        document.getElementById("submit").addEventListener("click", function() {
+            var title = document.getElementById("title").value;
+            var content = editor.getMarkdown();
+            
+            if (!title) {
+                alert("请输入标题");
+                return;
+            }
+            
+            // 这里应该添加AJAX请求来保存博客
+            console.log("标题:", title);
+            console.log("内容:", content);
+            // 实际项目中这里应该是提交到服务器的代码
+        });
+    </script>
+</body>
+</html>
